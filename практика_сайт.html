@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видеохостинги</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --youtube-red: #ff0000;
+            --rutube-blue: #1E90FF;
+            --vimeo-teal: #1ab7ea;
+            --twitch-purple: #9146FF;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--youtube-red), var(--rutube-blue));
+            border-radius: 2px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+            color: #555;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--youtube-red);
+            border-right: 4px solid var(--rutube-blue);
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .youtube {
+            background: var(--youtube-red);
+        }
+        
+        .rutube {
+            background: var(--rutube-blue);
+        }
+        
+        .btn i {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+        
+        .youtube-card::after {
+            background: linear-gradient(90deg, var(--youtube-red), #ff6b6b);
+        }
+        
+        .rutube-card::after {
+            background: linear-gradient(90deg, var(--rutube-blue), #6ec1ff);
+        }
+        
+        .other-card::after {
+            background: linear-gradient(90deg, #2c3e50, #4ca1af);
+        }
+        
+        .card h2 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 1.8rem;
+        }
+        
+        .card h2 i {
+            margin-right: 15px;
+            font-size: 28px;
+        }
+        
+        .youtube-card h2 {
+            color: var(--youtube-red);
+        }
+        
+        .rutube-card h2 {
+            color: var(--rutube-blue);
+        }
+        
+        .card p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .features {
+            margin-top: 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        
+        .feature:hover {
+            background: rgba(0,0,0,0.03);
+        }
+        
+        .feature i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+            font-size: 18px;
+            padding-top: 3px;
+        }
+        
+        .youtube-card .feature i {
+            color: var(--youtube-red);
+        }
+        
+        .rutube-card .feature i {
+            color: var(--rutube-blue);
+        }
+        
+        .other-card .feature:nth-child(1) i {
+            color: var(--vimeo-teal);
+        }
+        
+        .other-card .feature:nth-child(2) i {
+            color: var(--twitch-purple);
+        }
+        
+        .feature span {
+            flex: 1;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .youtube-card {
+            animation-delay: 0.1s;
+        }
+        
+        .rutube-card {
+            animation-delay: 0.2s;
+        }
+        
+        .other-card {
+            animation-delay: 0.3s;
+        }
+        
+        .decoration {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0) 70%);
+            z-index: -1;
+        }
+        
+        .dec-1 {
+            top: 50px;
+            left: -100px;
+        }
+        
+        .dec-2 {
+            bottom: 100px;
+            right: -50px;
+            background: radial-gradient(circle, rgba(30,144,255,0.1) 0%, rgba(30,144,255,0) 70%);
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration dec-1"></div>
+    <div class="decoration dec-2"></div>
+    
+    <h1>Популярные видеохостинги</h1>
+    <p class="intro">Видеохостинг - это сервис для размещения и просмотра видеоконтента. Современные платформы предлагают уникальные возможности для авторов и зрителей.</p>
+    
+    <div class="buttons">
+        <a href="https://youtube.com" class="btn youtube">
+            <i class="fab fa-youtube"></i> YouTube
+        </a>
+        <a href="https://rutube.ru" class="btn rutube">
+            <i class="fas fa-play-circle"></i> Rutube
+        </a>
+    </div>
+    
+    <div class="card-container">
+        <div class="card youtube-card">
+            <h2><i class="fab fa-youtube"></i> YouTube</h2>
+            <p>YouTube стал для миллионов людей альтернативой ТВ. В отличие от телевидения, здесь можно выбирать контент по своему вкусу, смотреть его в удобное время, управлять воспроизведением и пересматривать ролики без ограничений.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span><strong>2 млрд+ пользователей</strong> - крупнейшая видеоплатформа в мире</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-film"></i>
+                    <span><strong>Поддержка 4K/8K</strong> - высочайшее качество видео</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span><strong>Монетизация для авторов</strong> - несколько способов заработка</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card rutube-card">
+            <h2><i class="fas fa-play-circle"></i> Rutube</h2>
+            <p>Rutube предлагает контент по 26 основным тематикам, включая развлекательные, новостные и образовательные видео. Наибольшей популярностью у зрителей пользуются политические новости, тревел-контент и реакции на шоу.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span><strong>55 млн+ пользователей</strong> - быстрорастущая аудитория</span>
+                </div>
+                <div class="feature">
+                    <i class="fab fa-vk"></i>
+                    <span><strong>Интеграция с VK</strong> - удобный доступ через соцсеть</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-ruble-sign"></i>
+                    <span><strong>Рублевая монетизация</strong> - удобные выплаты для российских авторов</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card other-card">
+        <h2><i class="fas fa-list"></i> Другие платформы</h2>
+        <div class="features">
+            <div class="feature">
+                <i class="fab fa-vimeo"></i>
+                <span><strong>Vimeo</strong> - это видеохостинг, созданный специально для профессионалов, стартапов и бизнеса, которым нужно надежное место для публикации контента. Сервис поддерживает загрузку, обмен и live-трансляции видео в высоком качестве. В отличие от аналогов, Vimeo не показывает рекламу, что особенно ценно для кинематографистов и компаний, стремящихся к чистому и лаконичному представлению своих роликов.</span>
+            </div>
+            <div class="feature">
+                <i class="fab fa-twitch"></i>
+                <span><strong>Twitch</strong> - платформа, первоначально задуманная как сервис для игровых стримов, превратилась в масштабную площадку для разнообразного живого контента. Пользователи могут наслаждаться не только игровыми трансляциями, но и музыкальными выступлениями, разговорными шоу и обзорами популярных блогеров. Особенность Twitch - интерактивность, позволяющая зрителям общаться с создателями контента в реальном времени.</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
